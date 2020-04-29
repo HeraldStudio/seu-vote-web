@@ -10,21 +10,21 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   // },
   // 主页
-  {
+  /*{
     path: '/',
     name: 'home',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName*/'../views/Home.vue')
-  },
+    component: () => import('../views/Home.vue')
+  },*/
   /*{
     path: '/',
     name: 'list',
     component: List
   },*/
   {
-    path: '/test',
+    path: '/',
     name: 'test',
     component: () => import('../views/Test.vue')
   },

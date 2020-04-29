@@ -3,8 +3,8 @@
   <div class="test">
     <background title :isHome="true">
       <div class="app-title">
-        <el-card>
-          <h3 style="text-align: center;">问题{{currentPage}}</h3>
+        <el-card  style="text-align: center;">
+          <h3>问题{{currentPage}}</h3>
           <el-form
             :model="result"
             style="font-size:24px; margin-left: 15px; margin-right: 15px; margin-top: -30px;"

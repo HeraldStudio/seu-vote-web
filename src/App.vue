@@ -42,7 +42,7 @@ export default {
             return // 很重要，不要进入后面的流程
           } // 执行到此处说明ticket无效，给他清理了就是了
         }
-        window.location.search = ''
+        //window.location.search = ''
       }
       let res = await this.$axios.get("/user");
       console.log(res.data);

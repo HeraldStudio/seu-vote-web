@@ -8,39 +8,16 @@
     </div>
     <div class="app-content-wrapper">
       <div class="header">
-        <img v-if="!isHome" class="home-buttom" src="../assets/home.svg" @click="gotoHome">
         <img v-if="!isHome" class="back-buttom" src="../assets/back.svg" @click="goBack">
         <div v-else style="margin-left:10px;"></div>
-        <img class="seu-logo" src="../assets/seu-logo.svg">
-        <div class="title" :style="this.$device.isDesktop?'font-size:18px':'font-size:15px'">东南学工</div>
         <div class="space"></div>
-        <div>
-          <el-select
-            :style="this.$device.isDesktop?'width:150px':'width:120px'"
-            v-model="roleId"
-            :size="this.$device.isDesktop?'large':'mini'"
-            class="role-select"
-            filterable
-            v-if="permissionList.length>1"
-            @change="changeRole"
-          >
-            <el-option
-              v-for="item in permissionList"
-              :key="item.identityId"
-              :label="roleDisplay(item)"
-              :value="item.identityId"
-            ></el-option>
-          </el-select>
-        </div>
         <img v-if="!isWechat" class="logout-button" src="../assets/logout.svg" @click="logout">
       </div>
       <div class="app-content">
         <h2 class="app-title">{{title}}</h2>
         <p v-if="desc" class="app-desc">{{desc}}</p>
         <div v-else style="margin-top:20px;"></div>
-        <div class="panel">
           <slot></slot>
-        </div>
       </div>
     </div>
   </div>

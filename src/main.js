@@ -8,6 +8,8 @@ import './plugins/element.js'
 import './plugins/date.js'
 import './plugins/console.js'
 import 'babel-polyfill'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 window.__global__ = {
