@@ -19,8 +19,8 @@ export default {
   methods: {
     initAxios() {
       // 初始化 Axios 配置
-      this.$axios.defaults.baseURL = "https://xgbxscwx.seu.edu.cn/api/";
-      //this.$axios.defaults.baseURL = "localhost:3000";
+      //this.$axios.defaults.baseURL = "https://xgbxscwx.seu.edu.cn/api/";
+      this.$axios.defaults.baseURL = "localhost:3000";
       this.$axios.defaults.headers["x-api-token"] = this.$store.state.token;
     },
     async login() {
@@ -33,7 +33,7 @@ export default {
           // 包含 ticket，开启登录流程
           let res = await this.$axios.post('/auth', { 
             ticket,
-            service: 'https://xgbxscwx.seu.edu.cn',
+            service: 'localhost:8081',
             platform: this.$device.platform()
           })
           if(res.data.success){
@@ -53,11 +53,7 @@ export default {
           params:this.$route.params,
           fullPath:this.$route.fullPath
           })
-        if(this.$device.isWechat){
-          window.location = `https://xgbxscwx.seu.edu.cn/cas-we-can/login?goto=https://xgbxscwx.seu.edu.cn`
-        } else {
-          window.location = `https://newids.seu.edu.cn/authserver/login?goto=https://xgbxscwx.seu.edu.cn`
-        }
+          window.location = `https://seicwxbz.seu.edu.cn/cas-we-can/login?goto=http://localhost:8080` //service modify
       } else if (this.$store.state.hasUnfinishedRoute) {
         // token 有效，并且还有未完成的路由
         loading.close()
