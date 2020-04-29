@@ -7,7 +7,7 @@
   "author": "wolf-tungsten <canis.tungsten@foxmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel ./public/index.html --port=8080",
+    "dev": "parcel ./public/index.html --port=8081",
     "build": "parcel build ./public/index.html --public-url //cdn.xgbxscwx.myseu.cn/;"
   },
   "dependencies": {

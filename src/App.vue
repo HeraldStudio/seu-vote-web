@@ -20,7 +20,7 @@ export default {
     initAxios() {
       // 初始化 Axios 配置
       //this.$axios.defaults.baseURL = "https://xgbxscwx.seu.edu.cn/api/";
-      this.$axios.defaults.baseURL = "localhost:3000";
+      this.$axios.defaults.baseURL = "https://seicwxbz.seu.edu.cn/api/";
       this.$axios.defaults.headers["x-api-token"] = this.$store.state.token;
     },
     async login() {
@@ -33,7 +33,7 @@ export default {
           // 包含 ticket，开启登录流程
           let res = await this.$axios.post('/auth', { 
             ticket,
-            service: 'localhost:8081',
+            service: 'https://seicwxbz.seu.edu.cn/vote', //service Modify 
             platform: this.$device.platform()
           })
           if(res.data.success){
@@ -45,6 +45,7 @@ export default {
         window.location.search = ''
       }
       let res = await this.$axios.get("/user");
+      console.log(res.data);
       if (!res.data.success) {
         // 如果获取失败，就说明 token 无效了
         // 首先保存当前路由
@@ -53,7 +54,11 @@ export default {
           params:this.$route.params,
           fullPath:this.$route.fullPath
           })
-          window.location = `https://seicwxbz.seu.edu.cn/cas-we-can/login?goto=http://localhost:8080` //service modify
+        if (this.$device.isWechat) {
+          window.location = `https://seicwxbz.seu.edu.cn/cas-we-can/login?goto=https://seicwxbz.seu.edu.cn/vote`;
+        } else {
+          window.location = `https://newids.seu.edu.cn/authserver/login?goto=https://seicwxbz.seu.edu.cn/vote`;
+        } //service modify
       } else if (this.$store.state.hasUnfinishedRoute) {
         // token 有效，并且还有未完成的路由
         loading.close()
