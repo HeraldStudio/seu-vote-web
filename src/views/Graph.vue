@@ -2,7 +2,7 @@
   <div>
     <background :isHome="false">
       <div class="app-content">
-        <el-card :style="{width: this.$device.isDesktop?'70%':'95%'}">
+        <el-card :style="{width: this.$device.isDesktop?'70%':'95%'}" v-if="already">
           <!-- <h3 style="text-align: center; margin: auto;">{{info.name}}</h3> -->
           <h4 style="text-align: center; margin: auto;">第{{currentProblem + 1}}题</h4>
           <div class="app-content">
@@ -10,65 +10,65 @@
               id="myChart"
               :style="{width: this.$device.isDesktop?'500px':'300px', height: this.$device.isDesktop?'500px':'300px'}"
             ></div>
+          <el-row style="text-align: center;">
             <el-button
-              style="text-align: center; margin: auto;"
+              v-if="currentProblem >= 1"
+              style="margin: auto;"
               size="medium"
-              type="success"
+              type="primary"
+              @click="toLast()"
+            >上一题</el-button>
+            <el-button
+              v-if="currentProblem < tableData.length - 1"
+              style="margin: auto;"
+              size="medium"
+              type="primary"
               @click="toNext()"
             >下一题</el-button>
+          </el-row>
           </div>
         </el-card>
+        <h2 v-else>参与投票之后才能看到结果哦</h2>
       </div>
     </background>
   </div>
 </template>
 
 <script>
-import { Card } from "element-ui";
+import { Card, Row } from "element-ui";
 import Background from "../components/Background.vue";
 export default {
   name: "graph",
   data() {
     return {
       testId: "",
+      already: false,
       screenWidth: document.body.clientWidth,
       currentProblem: 0,
       info: {
-        name: "第一套问卷"
+        name: "投票结果"
       },
-      tableData: [
-        {
-          Aanswer: 10,
-          Banswer: 5,
-          Canswer: 7,
-          Danswer: 0,
-          Eanswer: 20,
-          Fanswer: 13,
-          Ganswer: 17,
-          Hanswer: 1
-        },
-        {
-          Aanswer: 20,
-          Banswer: 6,
-          Canswer: 12,
-          Danswer: 5,
-          Eanswer: 10,
-          Fanswer: 2,
-          Ganswer: 47,
-          Hanswer: 12
-        }
-      ]
+      tableData: []
     };
-  },
-  mounted() {
-    this.draw();
   },
   components: {
     "el-card": Card,
+    "el-row": Row,
     background: Background
   },
-  created() {
+  async created() {
     this.testId = this.$route.query.testId;
+    const state = await this.$axios.get("/answer/voted");
+    this.already = state.data.result.isVoted;
+    const tableData = await this.$axios.get("/answer/chart");
+    if (tableData.data.success===true) {
+      this.tableData = tableData.data.result;
+    }
+    else {
+      this.tableData = [];
+    }
+    console.log(this.tableData.length);
+    this.draw();
   },
   methods: {
     draw() {
@@ -105,7 +105,7 @@ export default {
         },
         series: [
           {
-            name: "姓名",
+            name: "",
             type: "pie",
             radius: "55%",
             center: ["40%", "50%"],
@@ -123,7 +123,7 @@ export default {
       myChart.setOption(option);
     },
     toNext() {
-      if (this.currentProblem >= this.tableData.length) {
+      if (this.currentProblem >= this.tableData.length - 1) {
         this.$message({
           type: "warning",
           message: "最后一题了~"
@@ -131,6 +131,17 @@ export default {
         return ;
       }
       this.currentProblem++;
+      this.draw();
+    },
+    toLast() {
+      if (this.currentProblem <= 0) {
+        this.$message({
+          type: "warning",
+          message: "没有上一题了"
+        });
+        return ;
+      }
+      this.currentProblem--;
       this.draw();
     }
   }

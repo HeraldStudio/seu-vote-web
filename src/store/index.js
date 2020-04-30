@@ -12,6 +12,7 @@ export default new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
     token:'',
+    cardnum: "",
     hasUnfinishedRoute: false,
     unfinishedRoute: {},
     permission:{}
@@ -24,8 +25,15 @@ export default new Vuex.Store({
     clearUnfinishedRoute(state) {
       state.hasUnfinishedRoute = false
     },
+    clearCache(state) {
+      state.token = ""
+      state.cardnum =""
+    },
     token(state, payload) {
       state.token = payload
+    },
+    cardnum(state, payload) {
+      state.cardnum = payload
     },
   },
   actions: {

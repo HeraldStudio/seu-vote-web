@@ -14,7 +14,6 @@
         <img v-if="!isWechat" class="logout-button" src="../assets/logout.svg" @click="logout">
       </div>
       <div class="app-content">
-        <h2 class="app-title">{{title}}</h2>
         <p v-if="desc" class="app-desc">{{desc}}</p>
         <div v-else style="margin-top:20px;"></div>
           <slot></slot>
@@ -37,7 +36,6 @@ export default {
     };
   },
   props: {
-    title: { type: String, required: true },
     desc: { type: String, default: "" },
     isHome: { type: Boolean, default: false }
   },
@@ -53,7 +51,7 @@ export default {
     logout() {
       if (!this.isWechat) {
         this.$store.commit("clearCache");
-        window.location = `https://newids.seu.edu.cn/authserver/logout?goto=https://xgbxscwx.seu.edu.cn`;
+        window.location = `https://newids.seu.edu.cn/authserver/logout?goto=https://seicwxbz.seu.edu.cn/vote`;
       }
     }
   },

@@ -68,11 +68,13 @@ export default {
       } else {
         loading.close()
       }
+      console.log(res.data.result.cardnum)
+      this.$store.commit("cardnum", res.data.result.cardnum)
     }
   },
-  created() {
+  async created() {
     this.initAxios();
-    this.login();
+    await this.login();
   }
 };
 </script>

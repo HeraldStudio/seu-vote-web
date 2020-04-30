@@ -1,13 +1,14 @@
 /* eslint-disable vue/no-unused-components */
 <template>
   <div class="test">
-    <background title :isHome="true">
+    <background :isHome="true">
       <div class="app-title">
         <el-card  style="text-align: center;">
           <h3>问题{{currentPage}}</h3>
           <el-form
             :model="result"
             style="font-size:24px; margin-left: 15px; margin-right: 15px; margin-top: -30px;"
+            :disabled="already"
           >
             <el-form-item>
               <h4 v-html="tableData[currentPage - 1].question"></h4>
@@ -249,7 +250,10 @@ export default {
   },
   async created() {
     this.getTestID();
-    await setTimeout(() => {}, 10);
+    const state = await this.$axios.get("/answer/voted");
+    this.already = state.data.result.isVoted;
+    console.log("!!!");
+    console.log(state);
     //Todo get data
     for (let i = 0; i < this.tableData.length; i++) {
       this.result.qa.push([]);
@@ -313,12 +317,20 @@ export default {
       }
       if (fg === true) {
         console.log(this.answer);
-        const res = await this.$axios.post("/vote", this.answer);
-        this.$message({
-          type: "success",
-          message: "提交成功~"
-        });
-        this.already = true;
+        const res = await this.$axios.post("/answer/vote", this.answer);
+        if (res.data.success) {
+          this.$message({
+            type: "success",
+            message: "提交成功~"
+          });
+          this.already = true;
+        }
+        else {
+          this.$message({
+            type: "warning",
+            message: res.data.reason
+          });
+        }
       }
     }
   }
