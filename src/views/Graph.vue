@@ -4,7 +4,7 @@
       <div class="app-content">
         <el-card :style="{width: this.$device.isDesktop?'70%':'95%'}" v-if="already">
           <!-- <h3 style="text-align: center; margin: auto;">{{info.name}}</h3> -->
-          <h4 style="text-align: center; margin: auto;">第{{currentProblem + 1}}题</h4>
+          <h4 style="text-align: center; margin: auto;">{{currentProblem === 0 ? '参与者身份' : '投票结果'}}</h4>
           <div class="app-content">
             <div
               id="myChart"

@@ -205,19 +205,6 @@ export default {
         {
           type: "radio",
           other: false,
-          question: "你的身份是？",
-          choiceA: "A.在读本科生",
-          choiceB: "B.在读研究生",
-          choiceC: "C.学校教职工",
-          choiceD: "D.校友",
-          choiceE: "E.其他",
-          choiceF: "",
-          choiceG: "",
-          choiceH: ""
-        },
-        {
-          type: "radio",
-          other: false,
           question: "你最喜欢哪一款门户新皮肤？",
           choiceA: "A.第一款：红蓝学院风",
           choiceB: "B.第二款：暖黄松绿风",
