@@ -20,7 +20,7 @@ export default {
     initAxios() {
       // 初始化 Axios 配置
       //this.$axios.defaults.baseURL = "https://xgbxscwx.seu.edu.cn/api/";
-      this.$axios.defaults.baseURL = "https://seicwxbz.seu.edu.cn/api/";
+      this.$axios.defaults.baseURL = "https://seicwxbz.seu.edu.cn/vote-api/";
       this.$axios.defaults.headers["x-api-token"] = this.$store.state.token;
     },
     async login() {
