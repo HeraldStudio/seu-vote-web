@@ -3,8 +3,6 @@
     <div class="bg">
       <img class="blue-block block-mobile" src="../assets/background/small-blue-block.svg">
       <img class="blue-block block-pc" src="../assets/background/small-blue-block-pc.svg">
-      <img class="orange-block block-mobile" src="../assets/background/small-orange-block.svg">
-      <img class="orange-block block-pc" src="../assets/background/small-orange-block-pc.svg">
     </div>
     <div class="app-content-wrapper">
       <div class="header">
